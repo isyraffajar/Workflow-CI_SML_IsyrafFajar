@@ -3,6 +3,7 @@ name: Machine Learning Workflow CI
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   train-and-docker:
