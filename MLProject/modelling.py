@@ -21,7 +21,7 @@ def run_modelling():
     mlflow.set_experiment("Customer_Churn_Experiment")
     mlflow.autolog()
 
-    with mlflow.start_run(run_name="RandomForest_Run"):
+    with mlflow.start_run(run_name="RandomForest_Run", nested=True):
         # 4. Modelling
         model = RandomForestClassifier(n_estimators=100, random_state=42)
         model.fit(X_train, y_train)
