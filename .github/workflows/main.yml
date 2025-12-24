@@ -31,4 +31,4 @@ jobs:
       # SYARAT POIN ADVANCED
       - name: Build Docker Image
         run: |
-          mlflow models build-docker -m "models:/tuned_rf_model/1" -n "itopfajar/churn-model:latest" --install-mlflow || true
+          mlflow models build-docker -m "runs:/dummy/model" -n "itopfajar/customer-churn-model:latest" --install-mlflow || true
