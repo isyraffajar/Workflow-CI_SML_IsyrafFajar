@@ -22,13 +22,11 @@ jobs:
 
       - name: Run MLflow Project
         env:
-          MLFLOW_TRACKING_URI: https://dagshub.com/itopfajar/Eksperimen_SML_IsyrafFajar.mlflow
-          MLFLOW_TRACKING_USERNAME: itopfajar
-          MLFLOW_TRACKING_PASSWORD: ${{ secrets.DAGSHUB_TOKEN }}
+          DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }} 
         run: |
+          export MLFLOW_TRACKING_URI=https://itopfajar:${{ secrets.DAGSHUB_TOKEN }}@dagshub.com/itopfajar/Eksperimen_SML_IsyrafFajar.mlflow
           mlflow run MLProject/ --env-manager local
 
-      # SYARAT POIN ADVANCED
       - name: Build Docker Image
         run: |
           mlflow models build-docker -m "runs:/dummy/model" -n "itopfajar/customer-churn-model:latest" --install-mlflow || true
