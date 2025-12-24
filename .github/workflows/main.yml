@@ -41,12 +41,15 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          MODEL_PATH=$(find mlruns -name "model" -type d | head -n 1)
+          MODEL_PATH=$(find mlruns -name "MLmodel" -exec dirname {} \; | head -n 1)
+          
           if [ -z "$MODEL_PATH" ]; then
-            echo "Error: Folder model tidak ditemukan di mlruns!"
+            echo "Error: File MLmodel tidak ditemukan! Mari cek isi folder mlruns:"
+            ls -R mlruns
             exit 1
           fi
-          echo "Folder model ditemukan di: $MODEL_PATH"
+          
+          echo "Model ditemukan di path: $MODEL_PATH"
 
           mlflow models build-docker -m "$MODEL_PATH" -n "isyraffajar/customer-churn-model:latest" --install-mlflow
           docker push isyraffajar/customer-churn-model:latest    
