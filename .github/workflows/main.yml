@@ -22,7 +22,7 @@ jobs:
 
       - name: Run MLflow Project
         run: |
-          mlflow run MLProject/ --env-manager local
+          mlflow run MLProject/ --env-manager local --experiment-name "Customer_Churn_Experiment"
           
       - name: Upload Model Artifact
         uses: actions/upload-artifact@v4
